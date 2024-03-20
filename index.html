@@ -33,7 +33,7 @@
             margin-bottom: 10px;
         }
 
-        input[type="checkbox"] {
+        input[type="radio"] {
             margin-right: 5px;
         }
 
@@ -59,19 +59,44 @@
     <h1>Compatibility Quiz</h1>
     <form id="quizForm">
         <label>
-            <input type="checkbox" name="question1" value="yes"> Are you a fan of Limp Bizkit?
+            Question 1: Are you a fan of Limp Bizkit?
+            <input type="radio" name="question1" value="5"> 5
+            <input type="radio" name="question1" value="4"> 4
+            <input type="radio" name="question1" value="3"> 3
+            <input type="radio" name="question1" value="2"> 2
+            <input type="radio" name="question1" value="1"> 1
         </label>
         <label>
-            <input type="checkbox" name="question2" value="yes"> Do you like Tiramisu?
+            Question 2: Do you like Tiramisu?
+            <input type="radio" name="question2" value="5"> 5
+            <input type="radio" name="question2" value="4"> 4
+            <input type="radio" name="question2" value="3"> 3
+            <input type="radio" name="question2" value="2"> 2
+            <input type="radio" name="question2" value="1"> 1
         </label>
         <label>
-            <input type="checkbox" name="question3" value="yes"> Do you enjoy the outdoors?
+            Question 3: Do you enjoy the outdoors?
+            <input type="radio" name="question3" value="5"> 5
+            <input type="radio" name="question3" value="4"> 4
+            <input type="radio" name="question3" value="3"> 3
+            <input type="radio" name="question3" value="2"> 2
+            <input type="radio" name="question3" value="1"> 1
         </label>
         <label>
-            <input type="checkbox" name="question4" value="yes"> Do you think olives are awful?
+            Question 4: Do you think olives are awful?
+            <input type="radio" name="question4" value="5"> 5
+            <input type="radio" name="question4" value="4"> 4
+            <input type="radio" name="question4" value="3"> 3
+            <input type="radio" name="question4" value="2"> 2
+            <input type="radio" name="question4" value="1"> 1
         </label>
         <label>
-            <input type="checkbox" name="question5" value="yes"> Do you like coffee?
+            Question 5: Do you like coffee?
+            <input type="radio" name="question5" value="5"> 5
+            <input type="radio" name="question5" value="4"> 4
+            <input type="radio" name="question5" value="3"> 3
+            <input type="radio" name="question5" value="2"> 2
+            <input type="radio" name="question5" value="1"> 1
         </label>
         <button type="submit">Submit</button>
     </form>
@@ -88,21 +113,20 @@
         let summary = '';
 
         formData.forEach((value, key) => {
-            if (value === 'yes') {
-                totalScore += 20;
-                summary += `Question "${key}" - Compatibility: 20/20<br>`;
-            } else {
-                summary += `Question "${key}" - Compatibility: 0/20<br>`;
-            }
+            totalScore += parseInt(value);
+            summary += `Question "${key}" - Compatibility: ${value}/5<br>`;
         });
+
+        // Calculate total compatibility score as a percentage
+        const percentageScore = (totalScore / (5 * 5)) * 100;
 
         // Display results
         const resultElement = document.getElementById('result');
         resultElement.innerHTML = `
             <h2>Compatibility Summary</h2>
             ${summary}
-            <h3>Total Compatibility Score: ${totalScore}%</h3>
-            <p>${getClosingRemark(totalScore)}</p>
+            <h3>Total Compatibility Score: ${percentageScore.toFixed(2)}%</h3>
+            <p>${getClosingRemark(percentageScore)}</p>
         `;
     });
 
